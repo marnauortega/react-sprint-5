@@ -1,0 +1,68 @@
+
+// Josh W Comeau's shadows https://www.joshwcomeau.com/shadow-palette/
+:root {
+  --shadow-color: 0deg 0% 0%;
+  --shadow-elevation-high: 0px 0.5px 0.6px hsl(var(--shadow-color) / 0.08),
+    -0.1px 3.3px 4px -0.3px hsl(var(--shadow-color) / 0.08), -0.1px 6.3px 7.7px -0.6px hsl(var(--shadow-color) / 0.09),
+    -0.2px 10.4px 12.7px -0.9px hsl(var(--shadow-color) / 0.1),
+    -0.3px 16.9px 20.7px -1.2px hsl(var(--shadow-color) / 0.11),
+    -0.4px 26.9px 32.9px -1.5px hsl(var(--shadow-color) / 0.11),
+    -0.7px 41.5px 50.7px -1.8px hsl(var(--shadow-color) / 0.12);
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+main {
+  height: 100vh;
+}
+
+.bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.weather {
+  padding: 2rem 0 0 2rem;
+}
+
+.foreground {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  display: flex;
+  flex-direction: column;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 25px;
+  padding: 2rem;
+  width: 500px;
+  box-shadow: var(--shadow-elevation-high);
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+}
+
+.joke {
+  height: 40px;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.next-joke {
+  color: white;
+  background-color: #40d4dc;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
