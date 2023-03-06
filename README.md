@@ -9,7 +9,8 @@ This is a course project consisting of:
 - A joke generator which randomly fetches jokes from 3 different APIs and allows to vote them.
 - A weather panel which leverages geolocation to display the current weather and temperature
 - A city selector which allows to display weather data from the world's 40 most populated cities.
-- An animated blob generated with openGL through [Three.js](https://threejs.org/)
+- An animated blob generated with WebGL through [Three.js](https://threejs.org/)
+- Unit tests for the app, including an API call mock.
 
 ## Details
 
