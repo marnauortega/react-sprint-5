@@ -1,82 +1,235 @@
-// Josh W Comeau's shadows https://www.joshwcomeau.com/shadow-palette/
-:root {
-  --shadow-color: 0deg 0% 0%;
-  --shadow-elevation-high: 0px 0.5px 0.6px hsl(var(--shadow-color) / 0.08),
-    -0.1px 3.3px 4px -0.3px hsl(var(--shadow-color) / 0.08), -0.1px 6.3px 7.7px -0.6px hsl(var(--shadow-color) / 0.09),
-    -0.2px 10.4px 12.7px -0.9px hsl(var(--shadow-color) / 0.1),
-    -0.3px 16.9px 20.7px -1.2px hsl(var(--shadow-color) / 0.11),
-    -0.4px 26.9px 32.9px -1.5px hsl(var(--shadow-color) / 0.11),
-    -0.7px 41.5px 50.7px -1.8px hsl(var(--shadow-color) / 0.12);
-}
+@import "_typography";
+@import "_variables";
 
 body {
   margin: 0;
   font-family: sans-serif;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-display: swap;
+  background-color: $main-color;
+  height: 100vh;
+}
+
+a:any-link {
+  text-decoration: none;
+  color: inherit;
 }
 
 main {
   height: 100vh;
+  z-index: 1;
+  position: relative;
 }
 
-.bg {
+#bubble {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
-  object-fit: cover;
+}
+
+.frame {
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  padding: 4rem;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 25px;
+  font-weight: 300;
+}
+
+.padding-left {
+  padding-left: 1rem;
 }
 
 .weather {
-  padding: 2rem 0 0 2rem;
+  z-index: 1;
+  position: relative;
+  padding-bottom: 0;
+}
+
+.weather-right {
+  display: flex;
+  align-items: flex-start;
+}
+
+.weather-icon {
+  margin-right: -1rem;
+  width: 65px;
+  position: relative;
+  top: -20px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
 }
 
 .foreground {
   position: absolute;
   left: 50%;
-  top: 40%;
+  top: 50%;
   display: flex;
   flex-direction: column;
   transform: translate(-50%, -50%);
-  background-color: white;
-  border-radius: 25px;
   box-sizing: border-box;
-  padding: 2rem;
-  width: 500px;
-  max-width: calc(100% - 4rem);
-  box-shadow: var(--shadow-elevation-high);
+  width: 525px;
 }
 
-h1 {
+#main-heading {
   margin: 0;
-  text-align: center;
+  text-transform: uppercase;
+  color: $main-color;
+  font-weight: 800;
+  font-size: 90px;
 }
 
 .joke {
-  height: 40px;
-  text-align: center;
   padding: 1rem 0;
+  font-size: 22px;
+  line-height: 1.4;
+  font-weight: 300;
+  color: $main-color;
+  transition: height 0.5s;
 }
 
-.score-buttons {
+.next-joke {
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 800;
+  flex: 1;
+}
+
+#score-buttons {
   padding-bottom: 1rem;
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   justify-content: space-between;
-
-  * {
-    flex: 1;
-  }
 }
 
 .button {
   color: white;
-  background-color: #40d4dc;
+  background-color: $main-color;
   padding: 1rem 2rem;
   border: none;
-  border-radius: 10px;
   cursor: pointer;
+  transition: transform 0.3s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rating {
+  cursor: pointer;
+  transition: transform 0.3s ease-out;
+}
+
+.button:hover,
+.rating:hover {
+  transform: scale(1.05);
+}
+
+.arrow {
+  padding-left: 2rem;
+}
+
+/* ---------------------------------
+   THREE JS & CURSOR & FADE OUT & LOADING
+  -------------------------------- */
+
+#scene-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.cursor {
+  background-color: #ff0066;
+  border: 2px solid white;
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#main-heading,
+#score-buttons,
+#scene-container,
+#city-selector {
+  opacity: 1;
+  transition: opacity 0.5s 0.4s ease-out, visibility 0s 0.9s linear;
+}
+
+#main-heading.faded,
+#score-buttons.faded,
+#scene-container.faded,
+#city-selector.faded {
+  opacity: 0;
+  z-index: -1;
+}
+
+.loading {
+  position: fixed;
+  background-color: #ff0066;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  animation: fadeOut 0.5s ease-out 1.5s 1 forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* -----------------
+   CITY SELECTOR
+  ----------------- */
+
+#city-selector {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.close {
+  position: absolute;
+  top: 4.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  z-index: 1;
+}
+
+.cities {
+  width: 75%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.city {
+  cursor: pointer;
+  text-align: center;
 }

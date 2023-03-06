@@ -1,5 +1,7 @@
 import { fetcher } from "./fetcher";
 import { fetchWeatherData, barcelona, successFunction, errorFunction } from "./weather";
+import { allAnimations } from "./blob";
+import { createCitiesPage } from "./city-selector";
 
 /* ==========================
         FETCH JOKES
@@ -55,6 +57,8 @@ function rateJoke() {
     addJoke(joke, score);
     jokeRated = true;
   }
+  fetcher(urls, headers, insertJoke);
+  console.log(jokeRatings);
 }
 
 type jokeScoreType = {
@@ -101,3 +105,15 @@ if (navigator.geolocation) {
 }
 
 fetchWeatherData(barcelona);
+
+/* ==========================
+        CITY SELECTOR PAGE
+===========================*/
+
+createCitiesPage();
+
+/* ==========================
+        THREE ANIMATIONS
+===========================*/
+
+allAnimations();

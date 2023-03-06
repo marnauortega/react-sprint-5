@@ -8,28 +8,41 @@
     <link rel="stylesheet" href="scss/main.scss" />
   </head>
   <body>
+    <div class="loading"></div>
     <main>
-      <div class="weather">
-        Avui:
-        <span class="weather-text"></span>
-      <div class="weather">Avui: Parcialment ennuvolat</div>
-      </div>
-      <picture>
-        <source srcset="assets/img/laughing.webp" type="image/webp" />
-        <source srcset="assets/img/laughing.jpg" type="image/jpeg" />
-        <img class="bg" src="assets/img/laughing.jpg" />
-      </picture>
-      <div class="foreground">
-        <h1>Preparat per riure? 🤣</h1>
-        <p class="joke"></p>
-        <div class="score-buttons">
-          <button class="button rating" id="1">Bad</button>
-          <button class="button rating" id="2">Normal</button>
-          <button class="button rating" id="3">Good</button>
+      <div class="cursor"></div>
+      <div class="weather frame">
+        <a href="#" class="weather-left">
+          <span class="weather-city">Avui:</span>
+          <span class="weather-temp padding-left"></span>
+        </a>
+        <div class="weather-right">
+          <span class="weather-description"></span>
+          <img class="weather-icon padding-left" src="#" alt="" />
         </div>
-        <button class="button next-joke">Següent acudit</button>
+      </div>
+      <div class="foreground">
+        <h1 id="main-heading">Preparat per riure?</h1>
+        <p class="joke"></p>
+        <div id="score-buttons">
+          <button class="button next-joke">
+            Següent<img class="arrow" src="assets/img/arrow.svg" alt="arrow icon" />
+          </button>
+          <img class="rating" src="assets/img/bad.svg" id="1" />
+          <img class="rating" src="assets/img/neutral.svg" id="2" />
+          <img class="rating" src="assets/img/good.svg" id="3" />
+        </div>
+      </div>
+      <div class="footer frame">
+        <span>Sprint 5</span>
+        <span>IT Academy</span>
+      </div>
+      <div id="city-selector" class="faded">
+        <img class="close" src="assets/img/close.svg" alt="" />
+        <div class="cities"></div>
       </div>
     </main>
+    <div id="scene-container"></div>
 
     <script type="module" src="js/main.ts"></script>
   </body>
